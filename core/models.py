@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Home(models.Model):
     name = models.CharField(max_length=50)
-    image = models.ImageField(upload_to='profile_pics/')  # Resimlerin yükleneceği klasör
+    image = models.ImageField(upload_to='profile_pics/')
     rol1 = models.CharField(max_length=20, null=True, blank=True)
     rol2 = models.CharField(max_length=20, null=True, blank=True)
     rol3 = models.CharField(max_length=20, null=True, blank=True)
