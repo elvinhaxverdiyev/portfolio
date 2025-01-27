@@ -34,4 +34,16 @@ class About(models.Model):
 
     def __str__(self):
         return self.title
+    
+    
+
+class Portfolio(models.Model):
+    title = models.CharField(max_length=200, verbose_name="Project Name")
+    description = models.TextField(verbose_name="Poject description")
+    image = models.ImageField(upload_to='profile_pics/', verbose_name="Project Image")
+    technologies = models.CharField(max_length=200, verbose_name="Texnologies")
+    github_link = models.URLField(max_length=200, verbose_name="GitHub Linki", blank=True, null=True)
+
+    def __str__(self):
+        return self.title
 

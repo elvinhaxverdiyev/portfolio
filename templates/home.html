@@ -154,33 +154,55 @@
 
 
 
-
-  <!-- Portfolio Section -->
+<!-- Portfolio Section -->
 <section id="portfolio" class="portfolio section">
   <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Portfolio</h2>
-        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-      </div><!-- End Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Portfolio</h2>
+    <p>You can get to know my portfolio in the section below.</p>
+  </div><!-- End Section Title -->
 
-
-          <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-            <img src="{% static 'assets/img/masonry-portfolio/masonry-portfolio-4.jpg' %}" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 2</h4>
-              <p>Lorem ipsum, dolor sit</p>
-              <a href="{% static 'assets/img/masonry-portfolio/masonry-portfolio-4.jpg' %}" title="App 2" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-              <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-            </div>
-          </div><!-- End Portfolio Item -->
-
-        </div><!-- End Portfolio Container -->
-
+  <!-- Portfolio Items -->
+  <div class="row portfolio-container">
+    {% for portfolio in portfolio_items %}
+    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+      <img src="{{ portfolio.image.url }}" class="img-fluid" alt="{{ portfolio.title }}">
+      <div class="portfolio-info">
+        <h4>{{ portfolio.title }}</h4>
+        <p>{{ portfolio.description }}</p>
+        <!-- Zoom Link -->
+        <a href="{{ portfolio.image.url }}" title="{{ portfolio.title }}" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+        <!-- Modal Trigger Link -->
+        <a href="#portfolioModal{{ portfolio.id }}" title="More Details" class="details-link" data-bs-toggle="modal" data-bs-target="#portfolioModal{{ portfolio.id }}"><i class="bi bi-link-45deg"></i></a>
       </div>
+    </div><!-- End Portfolio Item -->
 
-    </div>
+    <!-- Modal for Project Details -->
+    <div class="modal fade" id="portfolioModal{{ portfolio.id }}" tabindex="-1" aria-labelledby="portfolioModalLabel{{ portfolio.id }}" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="portfolioModalLabel{{ portfolio.id }}">{{ portfolio.title }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>{{ portfolio.description }}</p>
+            <img src="{{ portfolio.image.url }}" class="img-fluid" alt="{{ portfolio.title }}">
+            <p>Technologies used: {{ portfolio.technologies }}</p>
+            {% if portfolio.github_link %}
+              <p><a href="{{ portfolio.github_link }}" target="_blank">View on GitHub</a></p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div><!-- End Modal -->
+
+    {% endfor %}
+  </div><!-- End Portfolio Container -->
 
 </section><!-- /Portfolio Section -->
+
+
 
     <!-- Contact Section -->
     <section id="contact" class="contact section">
